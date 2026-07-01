@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+#define int long long
 using namespace std;
 
 int mod = 1e9+7;
@@ -66,7 +66,8 @@ int32_t main(){
         {
             if(s<coin)break;//optimization 1
             dp[s]+=dp[s-coin];
-            if(dp[s]>=mod)dp[s]-=mod;
+            if(dp[s]>=mod)dp[s]-=mod; //optimization 2
+            // dp[s]%=mod; //this is slow compare to above
         }
     }
     cout<<dp.back()<<endl;
