@@ -39,30 +39,53 @@ using namespace std;
 
 // iterative method ----------------------------------------------
 
+// int32_t main(){
+//     int n;
+//     cin>>n;
+//     vector<int>dp(n+1,0);
+
+//     for(int i=1;i<n+1;i++)
+//     {
+//         //find all digit for i
+//         vector<bool>digit(10,0);
+//         int copy=i;
+//         while(copy)
+//         {
+//             digit[copy%10]=1;
+//             copy/=10;
+//         }
+
+//         int steps=1e7;
+
+//         for(int d=1;d<10;d++)
+//         {
+//             if(digit[d])steps=min(steps,1+dp[i-d]);
+//         }
+//         dp[i]=steps;
+//     }
+//     cout<<dp[n]<<endl;
+//     return 0;
+// }
+
+// memory optimized
 int32_t main(){
     int n;
     cin>>n;
-    vector<int>dp(n+1,0);
+    vector<int>dp(10,0);
 
     for(int i=1;i<n+1;i++)
     {
-        //find all digit for i
-        vector<bool>digit(10,0);
+        dp[i%10]=0;
+        int steps=1e7;
         int copy=i;
         while(copy)
         {
-            digit[copy%10]=1;
+            if(copy%10)steps=min(steps,1+dp[(i-(copy%10))%10]);
             copy/=10;
         }
 
-        int steps=1e7;
-
-        for(int d=1;d<10;d++)
-        {
-            if(digit[d])steps=min(steps,1+dp[i-d]);
-        }
-        dp[i]=steps;
+        dp[i%10]=steps;
     }
-    cout<<dp[n]<<endl;
+    cout<<dp[n%10]<<endl;
     return 0;
 }
