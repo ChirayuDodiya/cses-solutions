@@ -1,6 +1,55 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// bool recursion(int index,int sum,vector<int>&money,vector<vector<int>>&dp)
+// {
+//     //base case
+//     if(sum==0)return true;
+//     if(index<0)return false;
+//     if(dp[index][sum]!=-1)return dp[index][sum];
+
+//     //recursion
+//     bool pos=false;
+//     //take this index 
+//     if(sum>=money[index])pos = pos | recursion(index-1,sum-money[index],money,dp);
+
+//     //skip this index
+//     pos = pos | recursion(index-1,sum,money,dp);
+
+//     return dp[index][sum]=pos;
+// }
+
+// //recursive method
+// int main(){
+//     int n;
+//     cin>>n;
+    
+//     vector<int>money(n);
+//     for(int i=0;i<n;i++)
+//     {
+//         int input;
+//         cin>>input;
+//         money[i]=input;
+//     }
+
+//     int sum=0;
+//     for(auto val:money)sum+=val;
+
+//     vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+
+//     for(int s=1;s<sum+1;s++)
+//     recursion(n-1,s,money,dp);
+
+//     vector<int>p;
+//     for(int s=1;s<sum+1;s++)
+//     {
+//         if(dp[n-1][s]==1)p.push_back(s);
+//     }
+//     cout<<p.size()<<endl;
+//     for(auto it:p)cout<<it<<" ";
+//     return 0;
+// }
+
 // iterative method
 
 // int main(){
@@ -75,41 +124,41 @@ using namespace std;
 
 //memory optimized method
 
-int main(){
-    int n;
-    cin>>n;
+// int main(){
+//     int n;
+//     cin>>n;
     
-    vector<int>money(n);
-    for(int i=0;i<n;i++)
-    {
-        int input;
-        cin>>input;
-        money[i]=input;
-    }
+//     vector<int>money(n);
+//     for(int i=0;i<n;i++)
+//     {
+//         int input;
+//         cin>>input;
+//         money[i]=input;
+//     }
 
-    int sum=0;
-    for(auto val:money)sum+=val;
+//     int sum=0;
+//     for(auto val:money)sum+=val;
 
-    vector<bool>dp(sum+1,0);
+//     vector<bool>dp(sum+1,0);
 
-    dp[0]=true;
+//     dp[0]=true;
 
-    for(int i=0;i<n;i++)
-    {
-        // for(int s=1;s<sum+1;s++) // Unbounded Knapsack
-        for(int s=sum;s>=1;s--) // 0-1 Knapsack
-        {
-            if(s>=money[i])dp[s] = dp[s] | dp[s-money[i]];
-        }
-    }
+//     for(int i=0;i<n;i++)
+//     {
+//         // for(int s=1;s<sum+1;s++) // Unbounded Knapsack
+//         for(int s=sum;s>=1;s--) // 0-1 Knapsack
+//         {
+//             if(s>=money[i])dp[s] = dp[s] | dp[s-money[i]];
+//         }
+//     }
 
-    vector<int>p;
-    for(int s=1;s<sum+1;s++)
-    {
-        if(dp[s])p.push_back(s);
-    }
+//     vector<int>p;
+//     for(int s=1;s<sum+1;s++)
+//     {
+//         if(dp[s])p.push_back(s);
+//     }
 
-    cout<<p.size()<<endl;
-    for(auto it:p)cout<<it<<" ";
-    return 0;
-}
+//     cout<<p.size()<<endl;
+//     for(auto it:p)cout<<it<<" ";
+//     return 0;
+// }
